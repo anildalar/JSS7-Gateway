@@ -1,0 +1,388 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+<body>
+
+<div style="height:40px">
+<ul id="nav" >
+  <li><a id="actv" > SS7 Gateway  </a>
+    <ul >
+      <li><a onclick='list_peers("list_peers")'> List PEER's</a> </li>
+      <li><a onclick='list_gts("list_gts")'> List Global Titles </a> </li>
+      <li><a onclick='list_rcs()'> List Routing Cases</a> </li>
+      <li><a onclick='list_dpcs("list_dpcs")'> List DPC's </a> </li>
+	  <li><a onclick='list_gts("reload_gts")'> Reload GT's and RC's </a> </li>
+	  <li><a onclick='list_dpcs("reload_dpcs")'> Reload DPC's </a> </li>
+	  <li><a onclick='list_peers("reload_peers")'> Reload PEER's </a> </li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+
+<div id="out" style="left:9px;right:100px;bottom:20px;border:1px ;overflow-y:scroll;padding:10px"></div> 
+<script>
+
+
+
+
+  function list_peers(cmd)
+  { 
+      xmlhttp.open("GET","peers.php?cmd="+cmd,false);
+      xmlhttp.send();
+      var result=xmlhttp.responseText.trim();
+      show_peers(result);
+      
+      return false;
+  }
+
+  function show_peers(result)
+  { 
+	  out.innerHTML="";
+      var s="";
+      s+="<h1> List PEER's </h1>";
+      s+="<table class='sub_tab'>";
+      result=JSON.parse(result);
+       
+      var index=0;
+      for (var i in result)
+      {
+          var obj = result[i];
+
+          if (index==0)
+          {
+              s+="<tr class='sms_caption' >";
+              s=s+ '<td><a>' + 'num' + '</a></td>';
+              for (var key in obj)
+              {
+                   s=s+ '<td><a >' + key + '</a></td>';
+              }
+               s+="</tr>";
+          }
+
+
+
+          s+="<tr class='sms_list' >";
+          index++;
+          s=s+ '<td><a>' + index + '</a></td>';
+          for (var key in obj)
+          {
+              if (key=="signaling_status" && obj[key]=="UP")  s=s+ '<td><a id="up" >' + obj[key] + '</a></td>';
+              else if (key=="signaling_status" && obj[key]=="DOWN")  s=s+ '<td><a id="down" >' + obj[key] + '</a></td>';
+              else  
+              {
+            	  act="";
+            	  if (key=="admin_state") act='ondblclick="change_admin_state('+"'"+obj[key]+"'"+",'"+obj["name"]+"'"+')"';
+            	  s=s+ '<td><a '+ act +' >' + obj[key] + '</a></td>';
+              }
+          }
+
+
+          s+="</tr>";
+      }
+      s=s+"</table>";
+
+
+      out.innerHTML=s;
+ }
+
+function change_admin_state(state,name)
+{
+    xmlhttp.open("GET","peers.php?name="+name+"&state="+state,false);
+    xmlhttp.send();
+    var result=xmlhttp.responseText.trim();
+    show_peers(result);   
+    
+    return false;
+    
+		
+}
+
+function reload_gts()
+{
+	list_gts("reload_gts");	
+}
+function show_gts()
+{
+	list_gts("list_gts");	
+}
+
+function list_gts(cmd)
+{ 
+      out.innerHTML="";
+      xmlhttp.open("GET","peers.php?cmd="+cmd,false);
+      xmlhttp.send();
+      var result=xmlhttp.responseText.trim();
+      var s="";
+      s+="<h1> List Global Titles </h1>";
+      s+="<table class='sub_tab'>";
+      result=JSON.parse(result);
+      
+       
+      var index=0;
+      for (var i in result)
+      {
+          var obj = result[i];
+
+          if (index==0)
+          {
+              s+="<tr class='sms_caption' >";
+              s=s+ '<td><a>' + 'num' + '</a></td>';
+              for (var key in obj)
+              {
+                   s=s+ '<td><a >' + key + '</a></td>';
+              }
+               s+="</tr>";
+          }
+
+
+
+          s+="<tr class='sms_list' >";
+          index++;
+          s=s+ '<td><a>' + index + '</a></td>';
+          for (var key in obj)
+          {
+              s=s+ '<td><a>' + obj[key] + '</a></td>';
+          }
+
+
+          s+="</tr>";
+      }
+      s=s+"</table>";
+
+
+      out.innerHTML=s;
+      return false;
+}
+
+function list_rcs()
+{ 
+      out.innerHTML="";
+      xmlhttp.open("GET","peers.php?cmd=list_rcs",false);
+      xmlhttp.send();
+      var result=xmlhttp.responseText.trim();
+      var s="";
+      s+="<h1> List Routing Cases </h1>";
+      s+="<table class='sub_tab'>";
+      result=JSON.parse(result);
+      
+       
+      var index=0;
+      for (var i in result)
+      {
+          var obj = result[i];
+
+          if (index==0)
+          {
+              s+="<tr class='sms_caption' >";
+              s=s+ '<td><a>' + 'num' + '</a></td>';
+              for (var key in obj)
+              {
+                   s=s+ '<td><a >' + key + '</a></td>';
+              }
+               s+="</tr>";
+          }
+
+
+
+          s+="<tr class='sms_list' >";
+          index++;
+          s=s+ '<td><a>' + index + '</a></td>';
+          for (var key in obj)
+          {
+              s=s+ '<td><a>' + obj[key] + '</a></td>';
+          }
+
+
+          s+="</tr>";
+      }
+      s=s+"</table>";
+
+
+      out.innerHTML=s;
+      return false;
+}
+
+function list_dpcs(cmd)
+{ 
+       out.innerHTML="";
+      xmlhttp.open("GET","peers.php?cmd="+cmd,false);
+      xmlhttp.send();
+      var result=xmlhttp.responseText.trim();
+      var s="";
+      s+="<h1> List DPC's </h1>";
+      s+="<table class='sub_tab'>";
+      result=JSON.parse(result);
+      
+       
+      var index=0;
+      for (var i in result)
+      {
+          var obj = result[i];
+
+          if (index==0)
+          {
+              s+="<tr class='sms_caption' >";
+              s=s+ '<td><a>' + 'num' + '</a></td>';
+              for (var key in obj)
+              {
+                   s=s+ '<td><a >' + key + '</a></td>';
+              }
+               s+="</tr>";
+          }
+
+
+
+          s+="<tr class='sms_list' >";
+          index++;
+          s=s+ '<td><a>' + index + '</a></td>';
+          
+          for (var key in obj)
+          {
+              if (key.indexOf("status")==0 && obj[key]=="UP")  s=s+ '<td><a id="up" >' + obj[key] + '</a></td>';
+              else if (key.indexOf("status")==0 && obj[key]=="DOWN")  s=s+ '<td><a id="down" >' + obj[key] + '</a></td>';
+              else  s=s+ '<td><a>' + obj[key] + '</a></td>';
+          }
+
+
+          s+="</tr>";
+      }
+      s=s+"</table>";
+
+
+      out.innerHTML=s;
+      return false;
+}
+
+
+
+function parse_sub(result)
+{
+      var obj = JSON.parse(result);
+      var s="<table class='sub_tab'>";
+      var i=0;
+      imsi="";
+      sub=obj;
+      var ll=21;
+    
+      var ts=["!ts11","!ts21","!ts22","multiparty","callhold","!ocsi","!sms_ocsi","obp","obi"];      
+      var cf=["callwait","!cfu","!cfb","!cfnrc","!cfnry"];
+      
+      for (var key in obj) 
+      {
+        var disabled="disabled";
+        if (key=="imsi") imsi=obj[key];
+        if (key=="msisdn" || key=="imsi") disabled=""; 
+
+        var ss='<input class="sub" type="text" id="'+key+ '" onchange="mod_sub(\''+key+'\',this.value)" '+
+               disabled+' value="'+obj[key]+'">';
+
+        var sss='<select class="sub" id="'+key+'" onchange="mod_sub(\''+key+'\',this.value)" ><option selected>'+obj[key];
+        if (ts.indexOf(key)>=0) ss=sss+
+                                   '</option><option>off</option><option>act</option></select>';
+       if (cf.indexOf(key)>=0) ss=sss+
+           '</option><option>off</option></option><option>on</option><option>act</option></select>';
+
+       if (key=="clip") ss=sss+
+           '</option><option>off</option></option><option>act</option><option>override</option></select>';
+       if (key=="clir") ss=sss+
+           '</option><option>off</option></option><option>act</option><option>actn</option><option>acty</option></select>';
+       //if (key=="obr") ss=sss+
+       //    '</option><option>off</option></option><option>roaming_not_allowed</option>'+
+       //    '<option>act_if_no_camel</option><option>act</option></select>';
+       if (key=="odb") ss=sss+
+           '</option><option>off</option></option><option>odb_oc</option>'+
+           '<option>odb_oic</option><option>odb_oicexh</option></select>';
+
+
+        s=s+ '<tr><td><a>' + key + '</a></td><td>'+ss+'</td></tr>';
+
+       
+        if (++i % ll ==0 ) s=s+"</table><table class='sub_tab'>"
+      }
+      s=s+"</table>";
+
+      var out=document.getElementById("out");
+      out.innerHTML=s;
+
+      xmlhttp.open("GET","gsh.php?cmd=get_gprs&imsi="+imsi,false);
+      xmlhttp.send();
+      var result2=xmlhttp.responseText;
+      var obj2 = JSON.parse(result2);
+      s=s+"<table class='gprs_tab'>";
+
+      obj2['sdusize']*=10;     
+
+      p=obj2['pdptype']*1;
+      obj2['pdptype']=p.toString(16).toUpperCase();
+      p=obj2['qos']*1;
+      obj2['qos']=p.toString(16).toUpperCase();
+ 
+      p=obj2['ext2qos']*1;
+      obj2['ext2qos']=("000000000000000" + p.toString(16).toUpperCase()).substr(-6);
+
+      max_down=obj2['max_down'];
+      if (max_down >0x40 && max_down<0x80) obj2['max_down']=64+(max_down-0x40)*8;
+      if (max_down >0x80 && max_down<0xff) obj2['max_down']=576+(max_down-0x80)*64;
+
+      max_up=obj2['max_up'];
+      if (max_up >0x40 && max_up<0x80) obj2['max_up']=64+(max_up-0x40)*8;
+      if (max_up >0x80 && max_up<0xff) obj2['max_up']=576+(max_up-0x80)*64;
+
+      g_down=obj2['g_down'];
+      if (g_down >0x40 && g_down<0x80) obj2['g_down']=64+(g_down-0x40)*8;
+      if (g_down >0x80 && g_down<0xff) obj2['g_down']=576+(g_down-0x80)*64;
+
+      g_up=obj2['g_up'];
+      if (g_up >0x40 && g_up<0x80) obj2['g_up']=64+(g_up-0x40)*8;
+      if (g_up >0x80 && g_up<0xff) obj2['g_up']=576+(g_up-0x80)*64;
+
+
+      for (var key in obj2)
+      {
+        s=s+'<tr><td><a>'+key+'</a></td><td><input class="gprs" type="text" disabled value="' + obj2[key]+'"></td></tr>';
+      }
+      s=s+"</table>";
+      out.innerHTML=s;
+      xmlhttp.open("GET","gsh.php?cmd=get_auc&imsi="+imsi,false);
+      xmlhttp.send();
+      var result2=xmlhttp.responseText;
+      var obj2 = JSON.parse(result2);
+      s=s+"<table class='auc_tab'>";
+      for (var key in obj2)
+      {
+        s=s+'<tr><td><a>'+key+'</a></td><td><input class="auc" type="text" disabled value="' + obj2[key]+'"></td></tr>';
+      }
+      s=s+"</table>";
+      out.innerHTML=s;
+      
+}
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+  <script>    xmlhttp=new XMLHttpRequest();  </script>	 
+
+</body>
+
+</html>

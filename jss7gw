@@ -1,0 +1,5 @@
+#!/bin/bash
+cd /usr/src/core/jss7gw
+#java -cp ss7.jar ss7.ss7gw1
+java -verbose -cp ss7.jar ss7.ss7gw1
+

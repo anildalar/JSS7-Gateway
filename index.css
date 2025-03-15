@@ -1,0 +1,102 @@
+
+.sub_tab  { color: navy;float:left;margin-right:30px;}
+.gprs_tab { color: navy;float:left;margin-right:30px;}
+.auc_tab  { color: navy;float:left;margin-left:0px;}
+.sub, .gprs , .auc { 
+    background: white; 
+    border: 1px solid #DDD; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px #DDD inset; 
+    color: blue; 
+    outline: none; 
+    width:130px;
+   } 
+
+.sub_tab tr td {
+    background: white;
+    border: 1px solid #DDD;
+    box-shadow: 0 0 5px #DDD inset;
+    color: navy;
+    outline: none;
+    margin:0;
+    padding:0 20px 0 20px;
+}
+
+.act_select {
+    background: white;
+    border: 1px solid #DDD;
+    box-shadow: 0 0 5px #DDD inset;
+    color: navy;
+    outline: none;
+    margin:0;
+    padding:0;
+}
+
+.sub_tab .sms_caption td {
+    background: blue;
+    border: 1px solid #DDD;
+    box-shadow: 0 0 5px #DDD inset;
+    color: white;
+    outline: none;
+    margin:0;
+    padding:0 20px 0 20px;
+}
+
+.sub_tab .sri_caption td {
+    background: navy;
+    border: 1px solid #DDD;
+    box-shadow: 0 0 5px #DDD inset;
+    color: white;
+    outline: none;
+    margin:0;
+    padding:0 20px 0 20px;
+}
+
+.sub_tab tr:hover {outline: 1px solid green;}
+
+#block   {color:red;}
+#abort   {color:black;}
+#allow   {color:green;}
+#default {color:navy;}
+
+.auc { width:260px;}
+
+.ms_list:hover {outline: 1px solid green;}
+.ms_list:hover .sub , a {cursor:pointer;}
+
+#nav { position: relative; top: 0px; float:left; margin: 0;padding: 0 0 0 0; cursor:pointer; }
+#nav li {  margin: 0; padding: 0; height: 35px; list-style: none; float: left; position: relative; }
+#nav a  { display: block; line-height: 1; padding: 5px 15px; font-size: 13px;  color: #2e4729; text-decoration: none; text-transform: uppercase; /*letter-spacing: 1px;*/ }
+	#nav ul { position: absolute; top: -999em; left: 0; z-index: 1001; width: 185px; margin: 0; padding: 10px 0; background: #fff; border: 1px solid #2e4729; border-top: 0; -webkit-box-shadow: 0 4px 4px rgba(0,0,0,0.3); -moz-box-shadow: 0 4px 4px rgba(0,0,0,0.3); box-shadow: 0 4px 4px rgba(0,0,0,0.3); }
+	#nav li:hover ul, #nav li.hover ul { top: 35px; }
+	#nav ul li { float: none; width: auto; height: auto; }
+	#nav ul li a  { display: block; padding: 2px 17px; color: #2e4729; font: normal 13px/18px arial, sans-serif; text-transform: uppercase; }
+	#nav ul li a:hover { color: #231f20; background: #edeedb; }
+
+	#nav li #actv  { color: white; background: #2e4729; }
+	#nav li #mayr  { color: white; background: #2e4729; }
+	#nav li #hist  { color: white; background: #2e4729; }
+	#nav li #frow  { color: white; background: #2e4729; }
+	#nav li #mer { color: white; background: #2e4729; }
+    #nav li #mayr:hover { color: #2e4729; background: #edeedb; }
+    #nav li #hist:hover { color: #2e4729; background: #edeedb; }
+    #nav li #actv:hover { color: #2e4729; background: #edeedb; }
+    #nav li #frow:hover { color: #2e4729; background: #edeedb; }
+    #nav li #mer:hover { color: #2e4729; background: #edeedb; }
+  
+
+
+	/* classroom mega-menu */
+	#nav div.dropdown { width: 360px; position: absolute; top: -999em; right: 0; z-index: 1001; margin: 0; padding: 10px 0; background: #fff; border: 1px solid #821518; border-top: 0; -webkit-box-shadow: 0 4px 4px rgba(0,0,0,0.3); -moz-box-shadow: 0 4px 4px rgba(0,0,0,0.3); box-shadow: 0 4px 4px rgba(0,0,0,0.3); }
+	#nav li:hover .dropdown, #nav li.hover .dropdown { top: 35px; }	
+	#nav li:hover .dropdown ul, #nav li.hover ul { top: auto; }	
+	#nav .drop-column { width: 120px; float: left; }
+	#nav .dropdown ul { position: relative; top: auto; left: auto; width: auto; padding: 0; border: none; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+	#nav .dropdown li h3 { margin: 0; padding: 0 10px; font-size: 10px; font-weight: normal; color: #545454; text-transform: uppercase; }
+
+ 
+	#up    { color: green; background: auto;font-weight: bold; }
+	#down  { color: red; background: auto;font-weight: bold; }
+ 
+
+
